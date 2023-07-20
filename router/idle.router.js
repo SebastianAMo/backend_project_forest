@@ -6,7 +6,7 @@ const GameService = require('../service/game.service.js');
 const gameService = new GameService();
 
 router.get('/current',async (req, res, err) => {
-  const dataGame = await gameService.getFile(config.nameFile);
+  const dataGame = await gameService.getGameStatus(config.nameFile);
   res.json(dataGame);
 }
 );
@@ -17,13 +17,18 @@ router.get('/win', (req, res) => {
 );
 
 router.delete('/die', (req, res) => {
-  const fileStatus = gameService.deleteFile(config.nameFile);
+  const fileStatus = gameService.deleteGameStatus(config.nameFile);
   res.json(fileStatus).status(200);
 }
 );
 
 router.post('/start', async (req,res, err) => {
-  await gameService.generateFile(config.nameFile,{"x":0,"y":0,"attacking":0,"jumping":false});
+  await gameService.startGame(config.nameFile, {
+    "x":0,
+    "y":0,
+    "attacking":0,
+    "jumping":false
+  });
   res.json({ message: 'Start' });
 }
 );

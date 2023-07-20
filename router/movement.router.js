@@ -1,23 +1,40 @@
 const router = require("express").Router();
+const { config } = require("../config");
+const GameService = require("../service/game.service.js");
 
-router.put("/up", (req, res) => {
-  res.json({ message: "Move up" });
+const gameService = new GameService();
+
+router.put("/up", async (req, res) => {
+ const data = await gameService.getGameStatus(config.nameFile);
+  data["y"] = data["y"] + 10;
+  await gameService.updateGameStatus(config.nameFile, data);
+  res.json({"Data_update":data});
 }
 );
 
-router.put("/right", (req, res) => {
-  res.json({ message: "Move right" });
+router.put("/down", async (req, res) => {
+  const data = await gameService.getGameStatus(config.nameFile);
+  data["y"] = data["y"] - 10;
+  await gameService.updateGameStatus(config.nameFile, data);
+  res.json({"Data_update":data});
 }
 );
 
-router.put("/left", (req, res) => {
-  res.json({ message: "Move left" });
+router.put("/right", async (req, res) => {
+  const data = await gameService.getGameStatus(config.nameFile);
+  data["x"] = data["x"] + 10;
+  await gameService.updateGameStatus(config.nameFile, data);
+  res.json({"Data_update":data});
 }
 );
 
-router.put("/down", (req, res) => {
-  res.json({ message: "Move down" });
+router.put("/left", async (req, res) => {
+  const data = await gameService.getGameStatus(config.nameFile);
+  data["x"] = data["x"] - 10;
+  await gameService.updateGameStatus(config.nameFile, data);
+  res.json({"Data_update":data});
 }
 );
+
 
 module.exports = router;
