@@ -7,6 +7,9 @@ const gameService = new GameService();
 router.put("/up", async (req, res) => {
  const data = await gameService.getGameStatus(config.nameFile);
   data["y"] = data["y"] + 10;
+  data["x"] = 0;
+  data["attacking"] = 0;
+  data["jumping"] = false;
   await gameService.updateGameStatus(config.nameFile, data);
   res.json({"Data_update":data});
 }
@@ -15,6 +18,9 @@ router.put("/up", async (req, res) => {
 router.put("/down", async (req, res) => {
   const data = await gameService.getGameStatus(config.nameFile);
   data["y"] = data["y"] - 10;
+  data["x"] = 0;
+  data["attacking"] = 0;
+  data["jumping"] = false;
   await gameService.updateGameStatus(config.nameFile, data);
   res.json({"Data_update":data});
 }
@@ -23,6 +29,9 @@ router.put("/down", async (req, res) => {
 router.put("/right", async (req, res) => {
   const data = await gameService.getGameStatus(config.nameFile);
   data["x"] = data["x"] + 10;
+  data["y"] = 0;
+  data["attacking"] = 0;
+  data["jumping"] = false;
   await gameService.updateGameStatus(config.nameFile, data);
   res.json({"Data_update":data});
 }
@@ -31,6 +40,9 @@ router.put("/right", async (req, res) => {
 router.put("/left", async (req, res) => {
   const data = await gameService.getGameStatus(config.nameFile);
   data["x"] = data["x"] - 10;
+  data["y"] = 0;
+  data["attacking"] = 0;
+  data["jumping"] = false;
   await gameService.updateGameStatus(config.nameFile, data);
   res.json({"Data_update":data});
 }
