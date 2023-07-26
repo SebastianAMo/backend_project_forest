@@ -1,8 +1,8 @@
 const router = require('express').Router();
 
 const movementRouter = require('./movement.router');
-const attackRouter = require('./attacking.router');
-const jumpRouter = require('./jumping.router');
+const attackRouter = require('./attack.router');
+const jumpRouter = require('./jump.router');
 const idleRouter = require('./idle.router');
 
 const loadEndpoints = (app) => {
