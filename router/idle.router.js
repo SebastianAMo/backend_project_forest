@@ -7,7 +7,11 @@ const gameService = new GameService();
 
 router.get('/current',async (req, res, err) => {
   const dataGame = await gameService.getGameStatus(config.nameFile);
-  res.json(dataGame);
+  if (dataGame){
+    res.json(dataGame).status(200);
+  }else{
+    res.json({ message: 'No Found' }).status(404);
+  }
 }
 );
 
@@ -29,7 +33,7 @@ router.post('/start', async (req,res, err) => {
     "attacking":0,
     "jumping":false
   });
-  res.json({ message: 'Start' });
+  res.json({ message: 'Start' }).sendStatus(201);
 }
 );
 
