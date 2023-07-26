@@ -5,17 +5,21 @@ class GameService extends FileService {
     super();
   }
 
-  async generateFile(fileName,data){
+  async startGame(fileName,data){
     await this.createFile(fileName,data);
   }
 
-  async getFile(fileName){
+  async getGameStatus(fileName){
     const data = await this.readFile(fileName);
     return data;
   }
 
-  deleteFile(fileName){
-    const isDeleted = this.deleteRef(fileName);
+  async updateGameStatus(fileName,data){
+    await this.updateFile(fileName,data);
+  }
+
+  deleteGameStatus(fileName){
+    const isDeleted = this.deleteFile(fileName);
     if(isDeleted){
       return `File ${fileName} deleted`;
     }else{

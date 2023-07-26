@@ -6,9 +6,9 @@ class FileService {
     this.basePath = `${process.cwd()}/${config.dataPath}`;
   }
 
-  async createFile(fileName, data = JSON.stringify({})) {
+  async createFile(fileName, data) {
     try {
-      await fs.writeFileSync(`${this.basePath}${fileName}`, data);
+      await fs.writeFileSync(`${this.basePath}${fileName}`, JSON.stringify(data));
     } catch (err) {
       console.error('[ERROR - createFile]:', err);
     }
@@ -26,12 +26,20 @@ class FileService {
     }
   }
 
-  deleteRef(fileName) {
+  async updateFile(fileName, data) {
+    try {
+      await fs.writeFileSync(`${this.basePath}${fileName}`, JSON.stringify(data));
+    } catch (err) {
+      console.error('[ERROR - updateFile]:', err);
+    }
+  }
+
+  deleteFile(fileName) {
     let deleted = true;
     fs.unlink(`${this.basePath}${fileName}`, (err) => {
       if (err) {
-        deleted = false;
         console.error('[ERROR - deleteRef]:', err);
+        deleted = false;
       }
     });
 
