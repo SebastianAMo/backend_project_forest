@@ -6,45 +6,62 @@ const gameService = new GameService();
 
 router.put("/up", async (req, res) => {
  const data = await gameService.getGameStatus(config.nameFile);
-  data["y"] = data["y"] + 10;
-  data["x"] = 0;
-  data["attacking"] = 0;
-  data["jumping"] = false;
-  await gameService.updateGameStatus(config.nameFile, data);
-  res.json({"Data_update":data});
+  if (data){
+    data["y"] = data["y"] + 10;
+    data["x"] = 0;
+    data["attacking"] = 0;
+    data["jumping"] = false;
+    await gameService.updateGameStatus(config.nameFile, data);
+    res.json({"Data_update":data}).status(200);
+  }else{
+    res.json({ message: 'No Found' }).status(404);
+  }  
 }
 );
 
 router.put("/down", async (req, res) => {
   const data = await gameService.getGameStatus(config.nameFile);
-  data["y"] = data["y"] - 10;
-  data["x"] = 0;
-  data["attacking"] = 0;
-  data["jumping"] = false;
-  await gameService.updateGameStatus(config.nameFile, data);
-  res.json({"Data_update":data});
+  if (data){
+    data["y"] = data["y"] - 10;
+    data["x"] = 0;
+    data["attacking"] = 0;
+    data["jumping"] = false;
+    await gameService.updateGameStatus(config.nameFile, data);
+    res.json({"Data_update":data});
+  }else{
+    res.json({ message: 'No Found' }).status(404);
+  }
 }
 );
 
 router.put("/right", async (req, res) => {
   const data = await gameService.getGameStatus(config.nameFile);
-  data["x"] = data["x"] + 10;
-  data["y"] = 0;
-  data["attacking"] = 0;
-  data["jumping"] = false;
-  await gameService.updateGameStatus(config.nameFile, data);
-  res.json({"Data_update":data});
+  if (data){
+    data["x"] = data["x"] + 10;
+    data["y"] = 0;
+    data["attacking"] = 0;
+    data["jumping"] = false;
+    await gameService.updateGameStatus(config.nameFile, data);
+    res.json({"Data_update":data}).status(200);
+  }else{
+    res.json({ message: 'No Found' }).status(404);
+  }
+
 }
 );
 
 router.put("/left", async (req, res) => {
   const data = await gameService.getGameStatus(config.nameFile);
-  data["x"] = data["x"] - 10;
-  data["y"] = 0;
-  data["attacking"] = 0;
-  data["jumping"] = false;
-  await gameService.updateGameStatus(config.nameFile, data);
-  res.json({"Data_update":data});
+  if (data){
+    data["x"] = data["x"] - 10;
+    data["y"] = 0;
+    data["attacking"] = 0;
+    data["jumping"] = false;
+    await gameService.updateGameStatus(config.nameFile, data);
+    res.json({"Data_update":data}).status(200);
+  }else{
+    res.json({ message: 'No Found' }).status(404);
+  }
 }
 );
 
