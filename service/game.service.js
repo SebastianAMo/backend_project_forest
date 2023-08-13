@@ -11,7 +11,11 @@ class GameService extends FileService {
 
   async getGameStatus(fileName){
     const data = await this.readFile(fileName);
-    return data;
+    if (data){
+      return data;
+    }else{
+      return false;
+    }
   }
 
   async updateGameStatus(fileName,data){
